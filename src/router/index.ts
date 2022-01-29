@@ -1,5 +1,11 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
+declare module 'vue-router' {
+  interface RouteMeta {
+    layout: string | undefined
+  }
+}
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
