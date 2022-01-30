@@ -2,12 +2,8 @@
   <div class="container mt-3">
     <div class="row">
       <div class="col-lg-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">{{ post?.title }}</h5>
-            <p class="card-text" v-html="post?.content"></p>
-          </div>
-        </div>
+        <Post v-if="post" :post="post" />
+        <div v-else class="alert alert-danger">Запись не найдена</div>
       </div>
     </div>
   </div>
@@ -18,6 +14,7 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import { IPost } from '@/store'
+import Post from '@/components/Post.vue'
 
 const route = useRoute()
 const store = useStore()
