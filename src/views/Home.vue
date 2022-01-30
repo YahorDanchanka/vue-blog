@@ -21,7 +21,6 @@ import { IPost } from '@/store'
 
 const store = useStore()
 
-store.dispatch('fetchPosts')
 store.commit('enableSearch')
 
 const posts = computed(() => {

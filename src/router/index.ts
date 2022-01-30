@@ -12,6 +12,10 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'home',
     component: () => import('@/views/Home.vue'),
+    beforeEnter: async (to) => {
+      await store.dispatch('fetchPosts')
+      return true
+    },
   },
   {
     path: '/posts/:id(\\d+)',
