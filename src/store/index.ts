@@ -40,6 +40,13 @@ export default createStore({
     setPosts(state, payload: IPost[]) {
       state.posts = payload
     },
+    deletePost(state, id: number | string) {
+      state.posts.forEach((post, index) => {
+        if (post.id == id) {
+          state.posts.splice(index, 1)
+        }
+      })
+    },
     setCurrentPost(state, payload: IPost | undefined) {
       state.currentPost = payload
     },
@@ -56,23 +63,31 @@ export default createStore({
   },
   actions: {
     async fetchPosts({ commit }) {
-      const response = await fetch(`${postsApi}/posts`)
       commit('enableLoading')
+      const response = await fetch(`${postsApi}/posts`)
 
       if (response.ok) {
         commit('setPosts', await response.json())
-        commit('disableLoading')
       }
 
       commit('disableLoading')
     },
     async fetchPost({ commit }, id: string | number) {
-      const response = await fetch(`${postsApi}/posts/${id}`)
       commit('enableLoading')
+      const response = await fetch(`${postsApi}/posts/${id}`)
 
       if (response.ok) {
         commit('setCurrentPost', await response.json())
-        commit('disableLoading')
+      }
+
+      commit('disableLoading')
+    },
+    async deletePost({ commit }, id: number | string) {
+      commit('enableLoading')
+      const response = await fetch(`${postsApi}/posts/${id}`, { method: 'DELETE' })
+
+      if (response.ok) {
+        commit('deletePost', id)
       }
 
       commit('disableLoading')

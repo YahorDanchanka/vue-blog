@@ -23,9 +23,10 @@
                   <td>{{ formatDate(post.updated_at) }}</td>
                   <td>{{ formatDate(post.created_at) }}</td>
                   <td>
-                    <router-link :to="{ name: 'posts/view', params: { id: post.id } }">
+                    <router-link :to="{ name: 'posts/view', params: { id: post.id } }" class="me-1">
                       <i class="bi bi-eye"></i>
                     </router-link>
+                    <a @click.prevent="deletePost(post.id)" href="#"><i class="bi bi-trash"></i></a>
                   </td>
                 </tr>
               </template>
@@ -51,4 +52,8 @@ store.commit('enableSearch')
 const posts = useFindPosts
 
 const formatDate = (timestamp: number) => new Date(timestamp * 1000).toLocaleString()
+
+const deletePost = (id: number | string) => {
+  store.dispatch('deletePost', id)
+}
 </script>
