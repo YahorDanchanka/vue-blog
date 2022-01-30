@@ -12,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'home',
     component: () => import('@/views/Home.vue'),
-    beforeEnter: async (to) => {
+    beforeEnter: async () => {
       await store.dispatch('fetchPosts')
       return true
     },
@@ -23,6 +23,15 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/posts/View.vue'),
     beforeEnter: async (to) => {
       await store.dispatch('fetchPost', to.params.id)
+      return true
+    },
+  },
+  {
+    path: '/admin/posts',
+    name: 'admin/posts/index',
+    component: () => import('@/views/admin/posts/Index.vue'),
+    beforeEnter: async () => {
+      await store.dispatch('fetchPosts')
       return true
     },
   },

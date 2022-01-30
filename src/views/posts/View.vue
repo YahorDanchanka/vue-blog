@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-3">
+  <div class="container">
     <div class="row">
       <div class="col-lg-12">
         <Post v-if="post" :post="post" :scenario="Scenario.Single" />

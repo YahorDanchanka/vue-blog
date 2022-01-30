@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-3">
+  <div class="container">
     <div class="row gy-3">
       <template v-if="posts.length">
         <div v-for="post in posts" class="col-lg-4">
