@@ -14,27 +14,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
 import { useStore } from 'vuex'
 import Post from '@/components/Post.vue'
-import { IPost } from '@/store'
+import useFindPosts from '@/composables/useFindPosts'
 
 const store = useStore()
 
 store.commit('enableSearch')
 
-const posts = computed(() => {
-  const query: string = store.state.search.query
-
-  if (query) {
-    return store.state.posts.filter((post: IPost) => {
-      return query
-        .toLowerCase()
-        .split(' ')
-        .every((v) => post.title.toLowerCase().includes(v))
-    })
-  }
-
-  return store.state.posts
-})
+const posts = useFindPosts
 </script>

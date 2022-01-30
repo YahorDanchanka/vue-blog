@@ -20,6 +20,16 @@ export default createStore({
       enable: false,
     },
   },
+  getters: {
+    findPosts: (state) => (query: string) => {
+      return state.posts.filter((post: IPost) => {
+        return query
+          .toLowerCase()
+          .split(' ')
+          .every((v) => post.title.toLowerCase().includes(v))
+      })
+    },
+  },
   mutations: {
     enableLoading(state) {
       state.loading = true
@@ -37,6 +47,7 @@ export default createStore({
       state.search.query = payload
     },
     enableSearch(state) {
+      state.search.query = ''
       state.search.enable = true
     },
     disableSearch(state) {
