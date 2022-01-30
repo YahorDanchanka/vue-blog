@@ -11,6 +11,7 @@
                 <th scope="col">Содержание</th>
                 <th scope="col">Дата обновления</th>
                 <th scope="col">Дата создания</th>
+                <th scope="col">Действия</th>
               </tr>
             </thead>
             <tbody>
@@ -21,6 +22,11 @@
                   <td>{{ post.content }}</td>
                   <td>{{ formatDate(post.updated_at) }}</td>
                   <td>{{ formatDate(post.created_at) }}</td>
+                  <td>
+                    <router-link :to="{ name: 'posts/view', params: { id: post.id } }">
+                      <i class="bi bi-eye"></i>
+                    </router-link>
+                  </td>
                 </tr>
               </template>
               <tr v-else>
