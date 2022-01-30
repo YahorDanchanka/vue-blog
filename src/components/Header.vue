@@ -11,9 +11,8 @@
             <router-link :to="link.to" class="nav-link" active-class="active">{{ link.label }}</router-link>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Введите запрос..." />
-          <button class="btn btn-outline-success" type="submit">Искать</button>
+        <form v-if="searchEnable" class="d-flex">
+          <input @input="searchQuery" class="form-control me-2" type="search" placeholder="Введите запрос..." />
         </form>
       </div>
     </div>
@@ -33,4 +32,10 @@ const props = defineProps({
     required: true,
   },
 })
+
+const searchEnable = computed(() => store.state.search.enable)
+const searchQuery = (event: InputEvent) => {
+  const query: string = (event.target as HTMLInputElement).value
+  store.commit('setSearchQuery', query)
+}
 </script>

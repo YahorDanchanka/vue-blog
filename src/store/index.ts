@@ -15,6 +15,10 @@ export default createStore({
     loading: false as Boolean,
     posts: [] as IPost[],
     currentPost: undefined as IPost | undefined,
+    search: {
+      query: '',
+      enable: false,
+    },
   },
   mutations: {
     enableLoading(state) {
@@ -28,6 +32,15 @@ export default createStore({
     },
     setCurrentPost(state, payload: IPost | undefined) {
       state.currentPost = payload
+    },
+    setSearchQuery(state, payload: string) {
+      state.search.query = payload
+    },
+    enableSearch(state) {
+      state.search.enable = true
+    },
+    disableSearch(state) {
+      state.search.enable = false
     },
   },
   actions: {

@@ -29,4 +29,8 @@ const router = createRouter({
   routes,
 })
 
+router.beforeEach(() => {
+  store.commit('disableSearch')
+})
+
 export default router
