@@ -14,6 +14,7 @@ export default createStore({
   state: {
     loading: false as Boolean,
     posts: [] as IPost[],
+    currentPost: undefined as IPost | undefined,
   },
   mutations: {
     enableLoading(state) {
@@ -25,6 +26,9 @@ export default createStore({
     setPosts(state, payload: IPost[]) {
       state.posts = payload
     },
+    setCurrentPost(state, payload: IPost | undefined) {
+      state.currentPost = payload
+    },
   },
   actions: {
     async fetchPosts({ commit }) {
@@ -35,6 +39,19 @@ export default createStore({
         commit('setPosts', await response.json())
         commit('disableLoading')
       }
+
+      commit('disableLoading')
+    },
+    async fetchPost({ commit }, id: string | number) {
+      const response = await fetch(`${postsApi}/posts/${id}`)
+      commit('enableLoading')
+
+      if (response.ok) {
+        commit('setCurrentPost', await response.json())
+        commit('disableLoading')
+      }
+
+      commit('disableLoading')
     },
   },
 })

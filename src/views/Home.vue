@@ -6,7 +6,9 @@
           <div class="card-body">
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text" v-html="post.content"></p>
-            <a href="#" class="btn btn-primary">Читать</a>
+            <router-link :to="{ name: 'posts/view', params: { id: post.id } }" class="btn btn-primary">
+              Читать
+            </router-link>
           </div>
         </div>
       </div>
