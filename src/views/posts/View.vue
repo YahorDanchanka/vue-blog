@@ -2,7 +2,7 @@
   <div class="container mt-3">
     <div class="row">
       <div class="col-lg-12">
-        <Post v-if="post" :post="post" />
+        <Post v-if="post" :post="post" :scenario="Scenario.Single" />
         <div v-else class="alert alert-danger">Запись не найдена</div>
       </div>
     </div>
@@ -15,6 +15,7 @@ import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import { IPost } from '@/store'
 import Post from '@/components/Post.vue'
+import { Scenario } from '@/components/post'
 
 const route = useRoute()
 const store = useStore()
