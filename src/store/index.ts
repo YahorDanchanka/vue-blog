@@ -8,6 +8,11 @@ export interface IPost {
   created_at: number
 }
 
+export interface IPostCrud {
+  title: string
+  content?: string
+}
+
 export const postsApi = 'http://api.blog.test'
 
 export default createStore({
@@ -81,6 +86,20 @@ export default createStore({
       }
 
       commit('disableLoading')
+    },
+    async createPost({ commit }, payload: IPostCrud): Promise<boolean> {
+      commit('enableLoading')
+      const response = await fetch(`${postsApi}/posts`, {
+        method: 'POST',
+        body: new URLSearchParams(payload as any),
+      })
+
+      if (response.ok) {
+        return true
+      }
+
+      commit('disableLoading')
+      return false
     },
     async deletePost({ commit }, id: number | string) {
       commit('enableLoading')

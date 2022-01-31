@@ -2,6 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
+        <router-link :to="{ name: 'admin/posts/create' }" class="btn btn-primary mb-3">Создать</router-link>
         <div class="table-responsive">
           <table class="table table-bordered">
             <thead>

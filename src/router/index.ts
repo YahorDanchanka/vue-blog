@@ -35,6 +35,11 @@ const routes: Array<RouteRecordRaw> = [
       return true
     },
   },
+  {
+    path: '/admin/posts/create',
+    name: 'admin/posts/create',
+    component: () => import('@/views/admin/posts/Create.vue'),
+  },
 ]
 
 const router = createRouter({
