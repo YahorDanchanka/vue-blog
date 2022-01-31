@@ -29,8 +29,13 @@ const store = useStore()
 const router = useRouter()
 const route = useRoute()
 
-const title = ref(store.state.currentPost?.title)
-const content = ref(store.state.currentPost?.content)
+const title = ref('')
+const content = ref('')
+
+if (props.scenario === Scenario.Update) {
+  title.value = store.state.currentPost?.title
+  content.value = store.state.currentPost?.content
+}
 
 const btnText = computed(() => (props.scenario === Scenario.Create ? 'Создать' : 'Обновить'))
 const onSubmit = async () => {
