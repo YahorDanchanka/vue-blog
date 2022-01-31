@@ -31,7 +31,7 @@
                 </tr>
               </template>
               <tr v-else>
-                <td colspan="5">Не найдено</td>
+                <td colspan="6">Не найдено</td>
               </tr>
             </tbody>
           </table>
