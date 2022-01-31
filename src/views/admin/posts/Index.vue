@@ -27,6 +27,9 @@
                     <router-link :to="{ name: 'posts/view', params: { id: post.id } }" class="me-1">
                       <i class="bi bi-eye"></i>
                     </router-link>
+                    <router-link :to="{ name: 'admin/posts/update', params: { id: post.id } }" class="me-1">
+                      <i class="bi bi-pencil"></i>
+                    </router-link>
                     <a @click.prevent="deletePost(post.id)" href="#"><i class="bi bi-trash"></i></a>
                   </td>
                 </tr>

@@ -9,6 +9,7 @@ export interface IPost {
 }
 
 export interface IPostCrud {
+  id?: number
   title: string
   content?: string
 }
@@ -77,15 +78,17 @@ export default createStore({
 
       commit('disableLoading')
     },
-    async fetchPost({ commit }, id: string | number) {
+    async fetchPost({ commit }, id: string | number): Promise<boolean> {
       commit('enableLoading')
       const response = await fetch(`${postsApi}/posts/${id}`)
+      commit('disableLoading')
 
       if (response.ok) {
         commit('setCurrentPost', await response.json())
+        return true
       }
 
-      commit('disableLoading')
+      return false
     },
     async createPost({ commit }, payload: IPostCrud): Promise<boolean> {
       commit('enableLoading')
@@ -93,23 +96,30 @@ export default createStore({
         method: 'POST',
         body: new URLSearchParams(payload as any),
       })
-
-      if (response.ok) {
-        return true
-      }
-
       commit('disableLoading')
-      return false
+
+      return response.ok
     },
-    async deletePost({ commit }, id: number | string) {
+    async updatePost({ commit }, payload: IPostCrud): Promise<boolean> {
+      commit('enableLoading')
+      const response = await fetch(`${postsApi}/posts/${payload.id}`, {
+        method: 'PUT',
+        body: new URLSearchParams(payload as any),
+      })
+      commit('disableLoading')
+      return response.ok
+    },
+    async deletePost({ commit }, id: number | string): Promise<boolean> {
       commit('enableLoading')
       const response = await fetch(`${postsApi}/posts/${id}`, { method: 'DELETE' })
+      commit('disableLoading')
 
       if (response.ok) {
         commit('deletePost', id)
+        return true
       }
 
-      commit('disableLoading')
+      return false
     },
   },
 })

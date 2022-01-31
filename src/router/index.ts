@@ -40,6 +40,14 @@ const routes: Array<RouteRecordRaw> = [
     name: 'admin/posts/create',
     component: () => import('@/views/admin/posts/Create.vue'),
   },
+  {
+    path: '/admin/posts/update/:id(\\d+)',
+    name: 'admin/posts/update',
+    component: () => import('@/views/admin/posts/Update.vue'),
+    beforeEnter: async (to) => {
+      return await store.dispatch('fetchPost', to.params.id)
+    },
+  },
 ]
 
 const router = createRouter({

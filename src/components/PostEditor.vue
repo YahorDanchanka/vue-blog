@@ -15,7 +15,7 @@
 <script lang="ts" setup>
 import { computed, PropType, ref } from 'vue'
 import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { Scenario } from '@/components/postEditor'
 
 const props = defineProps({
@@ -27,9 +27,10 @@ const props = defineProps({
 
 const store = useStore()
 const router = useRouter()
+const route = useRoute()
 
-const title = ref('')
-const content = ref('')
+const title = ref(store.state.currentPost?.title)
+const content = ref(store.state.currentPost?.content)
 
 const btnText = computed(() => (props.scenario === Scenario.Create ? 'Создать' : 'Обновить'))
 const onSubmit = async () => {
@@ -45,6 +46,19 @@ const onSubmit = async () => {
     }
 
     alert('Ошибка создания записи!')
+  } else if (props.scenario === Scenario.Update) {
+    const isSuccess = await store.dispatch('updatePost', {
+      id: route.params.id,
+      title: title.value,
+      content: content.value,
+    })
+
+    if (isSuccess) {
+      await router.push({ name: 'home' })
+      return
+    }
+
+    alert('Ошибка обновления записи!')
   }
 }
 </script>
