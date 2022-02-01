@@ -14,13 +14,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useStore } from 'vuex'
 import Post from '@/components/Post.vue'
 import useFindPosts from '@/composables/useFindPosts'
-
-const store = useStore()
-
-store.commit('enableSearch')
 
 const posts = useFindPosts
 </script>

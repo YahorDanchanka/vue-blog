@@ -52,8 +52,6 @@ import { cut } from '@/api/app/strings'
 
 const store = useStore()
 
-store.commit('enableSearch')
-
 const posts = useFindPosts
 
 const formatDate = (timestamp: number) => new Date(timestamp * 1000).toLocaleString()

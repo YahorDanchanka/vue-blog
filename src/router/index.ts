@@ -13,6 +13,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'home',
     component: () => import('@/views/Home.vue'),
     beforeEnter: async () => {
+      store.commit('enableSearch')
       await store.dispatch('fetchPosts')
       return true
     },
@@ -31,6 +32,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'admin/posts/index',
     component: () => import('@/views/admin/posts/Index.vue'),
     beforeEnter: async () => {
+      store.commit('enableSearch')
       await store.dispatch('fetchPosts')
       return true
     },
