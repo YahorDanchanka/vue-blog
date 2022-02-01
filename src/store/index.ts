@@ -25,6 +25,7 @@ export default createStore({
       query: '',
       enable: false,
     },
+    errorStatusCode: undefined as number | undefined,
   },
   getters: {
     findPosts: (state) => (query: string) => {
@@ -65,6 +66,9 @@ export default createStore({
     },
     disableSearch(state) {
       state.search.enable = false
+    },
+    setErrorStatusCode(state, statusCode: number | undefined) {
+      state.errorStatusCode = statusCode
     },
   },
   actions: {

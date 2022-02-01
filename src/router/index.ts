@@ -52,14 +52,24 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/:pathMatch(.*)*',
-    name: 'notFound',
-    component: () => import('@/views/404.vue'),
+    name: 'error',
+    component: () => import('@/views/Error.vue'),
+    beforeEnter: () => {
+      if (!store.state.errorStatusCode) {
+        store.commit('setErrorStatusCode', 404)
+      }
+    },
   },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+})
+
+router.onError(() => {
+  store.commit('setErrorStatusCode', 500)
+  router.push({ name: 'error' })
 })
 
 router.beforeEach(() => {
