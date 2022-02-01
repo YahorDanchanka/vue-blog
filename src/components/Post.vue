@@ -1,7 +1,8 @@
 <template>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">{{ post.title }}</h5>
+      <h1 v-if="scenario === Scenario['Single']" class="card-title">{{ post.title }}</h1>
+      <h5 v-else class="card-title">{{ post.title }}</h5>
       <p class="card-text" v-html="content"></p>
       <router-link
         v-if="scenario === Scenario['List']"
