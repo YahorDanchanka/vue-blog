@@ -20,7 +20,7 @@
                 <tr v-for="post in posts">
                   <th scope="row">{{ post.id }}</th>
                   <td>{{ post.title }}</td>
-                  <td>{{ post.content }}</td>
+                  <td>{{ cut(post.content) }}</td>
                   <td>{{ formatDate(post.updated_at) }}</td>
                   <td>{{ formatDate(post.created_at) }}</td>
                   <td>
@@ -48,6 +48,7 @@
 <script lang="ts" setup>
 import { useStore } from 'vuex'
 import useFindPosts from '@/composables/useFindPosts'
+import { cut } from '@/api/app/strings'
 
 const store = useStore()
 

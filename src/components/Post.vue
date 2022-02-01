@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">{{ post.title }}</h5>
-      <p class="card-text" v-html="post.content"></p>
+      <p class="card-text" v-html="content"></p>
       <router-link
         v-if="scenario === Scenario['List']"
         :to="{ name: 'posts/view', params: { id: post.id } }"
@@ -15,9 +15,10 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, PropType } from 'vue'
+import { computed, defineProps, PropType } from 'vue'
 import { IPost } from '@/store'
 import { Scenario } from '@/components/post'
+import { encode, cut } from '@/api/app/strings'
 
 const props = defineProps({
   post: {
@@ -28,5 +29,14 @@ const props = defineProps({
     type: Number as PropType<Scenario>,
     default: Scenario.List,
   },
+})
+
+const content = computed(() => {
+  if (props.scenario === Scenario.List && props.post.content) {
+    return cut(encode(props.post.content))
+    // return encode(props.post.content)
+  }
+
+  return props.post.content
 })
 </script>
