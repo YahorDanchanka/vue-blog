@@ -50,6 +50,11 @@ const routes: Array<RouteRecordRaw> = [
       return await store.dispatch('fetchPost', to.params.id)
     },
   },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'notFound',
+    component: () => import('@/views/404.vue'),
+  },
 ]
 
 const router = createRouter({

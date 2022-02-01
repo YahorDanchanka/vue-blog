@@ -4,5 +4,5 @@ export function cut(text: string, end: string = '...', length: number = 210) {
 }
 
 export function encode(text: string) {
-  return text.replace(/<\/?[a-z0-9]+>/gi, '')
+  return text.replace(/<\/?.+?>/gi, '')
 }

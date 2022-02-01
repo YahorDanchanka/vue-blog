@@ -17,3 +17,9 @@ const layout = computed(() => {
   return MainLayout
 })
 </script>
+
+<style lang="sass">
+img
+  max-width: 100%
+  height: auto
+</style>
