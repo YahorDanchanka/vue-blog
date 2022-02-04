@@ -1,6 +1,9 @@
 # vue-blog
 
 ## Project setup
+Backend (php 8.0+): [перейти](https://github.com/YahorDanchanka/yii2-rest-blog)
+
+Frontend:
 ```
 npm install
 ```
